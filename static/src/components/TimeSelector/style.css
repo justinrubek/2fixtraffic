@@ -1,0 +1,28 @@
+.container {
+  border: 2px solid #1d1d1d;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.4rem;
+  padding: 8px;
+}
+
+.container button {
+  background-color: #44af44;
+  border: none;
+  color: #f0f0f0;
+  padding: 8px 24px;
+  text-align: center;
+  display: inline-block;
+  font-size: 1.1rem;
+  transition: background-color 1s ease;
+}
+
+.container button:hover {
+  background-color: #118811;
+}
+
+.container input[type="time"] {
+  padding: 6px;
+}

@@ -1,0 +1,14 @@
+.container {
+  border: 1px solid black;
+}
+
+.label {
+  padding: 5px 10px;
+  display: inline-block;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.4rem;
+  padding: 8px;
+}

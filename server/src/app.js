@@ -38,10 +38,29 @@ function createSpreadsheet(data) {
   let wb = new xl.Workbook();
   let ws = wb.addWorksheet("Traffic Report");
 
-  let style = wb.createStyle({
+  let dayStyle = {
     font: {
-      color: "#FF0800",
-      size: 12
+      bold: true,
+      color: "#0000FF",
+      underline: true,
+      size: 14
+    },
+    alignment: {
+      horizontal: "center"
+    }
+  };
+
+  let typeStyle = wb.createStyle({
+    font: {
+      size: 14
+    },
+    alignment: {
+      horizontal: "center"
+    },
+    border: {
+      bottom: {
+        style: "thin"
+      }
     }
   });
 
@@ -50,22 +69,23 @@ function createSpreadsheet(data) {
   for (let dateData of data) {
     const items = dateData.items;
     const length = Object.keys(items).length;
-    const end_cell_num = distance_from_left + length;
+    const end_cell_num = distance_from_left + length - 1;
 
-    const displayDate = moment(dateData.date, "YYYY-MM-DD").format("Do MMM YY");
+    const displayDate = moment(dateData.date, "YYYY-MM-DD").format(
+      "dddd[,] DD MMM YYYY"
+    );
 
     // Manually position elements
-    ws.cell(1, distance_from_left, 1, end_cell_num, true).string(displayDate);
+    ws.cell(1, distance_from_left, 1, end_cell_num, true)
+      .string(displayDate)
+      .style(dayStyle);
 
     let types = 0;
     for (let type of Object.keys(items)) {
       // Title of types
-      ws.cell(
-        2,
-        distance_from_left + types,
-        2,
-        distance_from_left + types
-      ).string(type);
+      ws.cell(2, distance_from_left + types, 2, distance_from_left + types)
+        .string(type)
+        .style(typeStyle);
 
       let entries = 0;
       for (let entry of items[type]) {
@@ -82,7 +102,7 @@ function createSpreadsheet(data) {
       }
       types += 1;
     }
-    distance_from_left = end_cell_num + 1;
+    distance_from_left += length + 1;
   }
   return wb;
 }
@@ -104,11 +124,18 @@ app.get("/report", async (req, res) => {
   for (let date of dates) {
     const dateData = { items: {}, date };
     const folder_dir = path.join("logs", date);
+    if (!fs.existsSync(folder_dir)) {
+      continue;
+    }
     const files = fs.readdirSync(folder_dir);
 
     for (let file of files) {
       const file_dir = path.join(folder_dir, file);
-      dateData.items[file] = fs.readFileSync(file_dir, "utf8").split("\n");
+      if (fs.existsSync(file_dir)) {
+        dateData.items[file] = fs.readFileSync(file_dir, "utf8").split("\n");
+      } else {
+        dateData.items[file] = [];
+      }
     }
     data.push(dateData);
   }
@@ -116,8 +143,8 @@ app.get("/report", async (req, res) => {
   const name = `${new Date().getTime()}.xlsx`;
   let wb = createSpreadsheet(data, name);
 
-  wb.write(name);
-  res.send(200);
+  wb.write(name, res);
+  // res.send(200);
 });
 
 app.post("/log", async (req, res) => {

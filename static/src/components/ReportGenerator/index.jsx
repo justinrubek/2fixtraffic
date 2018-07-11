@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import fileDownload from "js-file-download";
 
 import style from "./style.css";
 
@@ -35,8 +36,11 @@ export default class ReportGenerator extends React.Component {
           />
         </div>
         <button
-          onClick={() => {
-            const response = axios.get("/report", { params: { start, end } });
+          onClick={async () => {
+            const response = await axios.get("/report", {
+              params: { start, end }
+            });
+            fileDownload(response.data, "report.xlsx");
           }}
         >
           Generate

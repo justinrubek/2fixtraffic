@@ -3,8 +3,11 @@ import path from "path";
 import logger from "morgan";
 import moment from "moment";
 
-import fs from "fs";
 import bluebird from "bluebird";
+
+import xl from "excel4node";
+
+import fs from "fs";
 bluebird.promisifyAll(fs);
 
 import config from "./config";
@@ -31,6 +34,59 @@ function getDateRange(start, end) {
   return dates;
 }
 
+function createSpreadsheet(data) {
+  let wb = new xl.Workbook();
+  let ws = wb.addWorksheet("Traffic Report");
+
+  let style = wb.createStyle({
+    font: {
+      color: "#FF0800",
+      size: 12
+    }
+  });
+
+  let distance_from_left = 1;
+
+  for (let dateData of data) {
+    const items = dateData.items;
+    const length = Object.keys(items).length;
+    const end_cell_num = distance_from_left + length;
+
+    const displayDate = moment(dateData.date, "YYYY-MM-DD").format("Do MMM YY");
+
+    // Manually position elements
+    ws.cell(1, distance_from_left, 1, end_cell_num, true).string(displayDate);
+
+    let types = 0;
+    for (let type of Object.keys(items)) {
+      // Title of types
+      ws.cell(
+        2,
+        distance_from_left + types,
+        2,
+        distance_from_left + types
+      ).string(type);
+
+      let entries = 0;
+      for (let entry of items[type]) {
+        // Each individual time
+
+        ws.cell(
+          3 + entries,
+          distance_from_left + types,
+          3 + entries,
+          distance_from_left + types
+        ).string(entry);
+
+        entries += 1;
+      }
+      types += 1;
+    }
+    distance_from_left = end_cell_num + 1;
+  }
+  return wb;
+}
+
 app.get("/report", async (req, res) => {
   const start = req.query.start;
   const end = req.query.end;
@@ -46,18 +102,22 @@ app.get("/report", async (req, res) => {
   const data = [];
   // Build an excel spreadsheet
   for (let date of dates) {
-    const dateData = {};
+    const dateData = { items: {}, date };
     const folder_dir = path.join("logs", date);
     const files = fs.readdirSync(folder_dir);
 
     for (let file of files) {
       const file_dir = path.join(folder_dir, file);
-      dateData[file] = fs.readFileSync(file_dir, "utf8");
+      dateData.items[file] = fs.readFileSync(file_dir, "utf8").split("\n");
     }
     data.push(dateData);
   }
 
-  res.send(data);
+  const name = `${new Date().getTime()}.xlsx`;
+  let wb = createSpreadsheet(data, name);
+
+  wb.write(name);
+  res.send(200);
 });
 
 app.post("/log", async (req, res) => {

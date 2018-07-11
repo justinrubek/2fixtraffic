@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+import style from "./style.css";
+
 import TimeSelector from "./TimeSelector";
 import TypeSelector from "./TypeSelector";
 import ReportGenerator from "./ReportGenerator";
@@ -36,7 +38,7 @@ export default class App extends React.Component {
     return (
       <div>
         <h1>Traffic Logger</h1>
-        <div>
+        <div className={style.box}>
           <div>
             <TypeSelector
               options={["call", "desk"]}
@@ -52,7 +54,10 @@ export default class App extends React.Component {
           </div>
           <button onClick={this.sendLog}>Log</button>
         </div>
-        <ReportGenerator />
+        <br />
+        <div className={style.box}>
+          <ReportGenerator />
+        </div>
       </div>
     );
   }

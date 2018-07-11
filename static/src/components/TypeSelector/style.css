@@ -1,5 +1,6 @@
 .container {
-  border: 2px solid #1d1d1d;
+  border: 1px solid #1d1d1d;
+  margin: 2px;
 }
 
 .label {

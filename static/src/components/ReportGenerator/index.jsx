@@ -38,9 +38,14 @@ export default class ReportGenerator extends React.Component {
         <button
           onClick={async () => {
             const response = await axios.get("/report", {
-              params: { start, end }
+              params: { start, end },
+              responseType: "blob"
             });
-            fileDownload(response.data, "report.xlsx");
+            console.log(response);
+            fileDownload(
+              response.data,
+              `2Fix Traffic Log - ${start}-${end}.xlsx`
+            );
           }}
         >
           Generate

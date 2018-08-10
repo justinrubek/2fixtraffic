@@ -1,0 +1,22 @@
+
+staging:
+  type: deploy
+  script: 
+    - npm i --prefix ./static
+    - npm run build --prefix ./static
+    - npm i --prefix ./server
+    - npm run build --prefix ./server
+    - npm run start --prefix ./server
+  only:
+    - master
+
+production:
+  type: deploy
+  script: 
+    - npm i --prefix ./static
+    - npm run build --prefix ./static
+    - npm i --prefix ./server
+    - npm run build --prefix ./server
+    - npm run start --prefix ./server
+  only:
+    - tags

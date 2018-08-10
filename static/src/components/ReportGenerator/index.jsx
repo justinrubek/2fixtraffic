@@ -44,7 +44,7 @@ export default class ReportGenerator extends React.Component {
             console.log(response);
             fileDownload(
               response.data,
-              `2Fix Traffic Log - ${start}-${end}.xlsx`
+              `2Fix Traffic Log - ${start} to ${end}.xlsx`
             );
           }}
         >

@@ -8,6 +8,7 @@ import TimeSelector from "./TimeSelector";
 import TypeSelector from "./TypeSelector";
 import ReportGenerator from "./ReportGenerator";
 import TodayPreview from "./TodayPreview";
+import DateView from "./DateView";
 
 function log(type, time) {
   console.log(`Sending: ${type} for time ${time}`);
@@ -63,7 +64,7 @@ export default class App extends React.Component {
         </div>
         <br />
         <div className={style.box}>
-          <TodayPreview />
+          <DateView />
         </div>
         <div className={style.box}>
           <ReportGenerator />

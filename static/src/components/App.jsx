@@ -18,7 +18,7 @@ function log(type, time) {
     time: time
   };
   // Post to server
-  axios.post("/log", data);
+  axios.post("/api/log", data);
 }
 
 export default class App extends React.Component {

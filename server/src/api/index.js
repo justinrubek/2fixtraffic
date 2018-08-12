@@ -2,6 +2,8 @@ import express from "express";
 import mongodb from "mongodb";
 import moment from "moment";
 
+import entries from "./entries";
+
 import createSpreadsheet from "./createSpreadsheet";
 import getDateRange from "./getDateRange";
 import logEntry from "./logEntry";
@@ -148,5 +150,7 @@ router.post("/log", async (req, res) => {
 
   res.sendStatus(201);
 });
+
+router.use("/entries", entries);
 
 export default router;

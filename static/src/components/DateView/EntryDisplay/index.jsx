@@ -1,26 +1,8 @@
 import React from "react";
-import moment from "moment";
-import axios from "axios";
+
+import Entry from "./Entry";
 
 import style from "./style.css";
-
-class Entry extends React.Component {
-  render() {
-    return (
-      <li key={this.props.id} className={style.cell}>
-        {moment(this.props.time).format("hh:mm A")}
-        <button
-          onClick={async () => {
-            let del = await axios.delete(`/api/entries/${this.props.id}`);
-            this.props.onChange();
-          }}
-        >
-          X
-        </button>
-      </li>
-    );
-  }
-}
 
 export default class EntryDisplay extends React.Component {
   render() {

@@ -38,7 +38,7 @@
   padding: 2px;
 }
 
-.container button {
+.button {
   background-color: #44af44;
   border: none;
   color: #f0f0f0;
@@ -50,7 +50,7 @@
   transition: background-color 1s ease;
 }
 
-.container button:hover {
+.button:hover {
   background-color: #118811;
 }
 

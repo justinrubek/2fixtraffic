@@ -26,8 +26,10 @@ export default class DateView extends React.Component {
 
     return (
       <div className={style.container}>
-        <h1>Traffic Viewer</h1>
-        <button onClick={this.refresh}>Refresh</button>
+        <div className={style.title}>Traffic Viewer</div>
+        <button onClick={this.refresh} className={style.button}>
+          Refresh
+        </button>
         <DateSelector value={date} onSelect={this.selectDate} />
         <EntryDisplay entries={entries} types={types} onChange={this.refresh} />
       </div>

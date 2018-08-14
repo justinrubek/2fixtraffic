@@ -16,7 +16,6 @@ export default class Entry extends React.Component {
   }
 
   onClick(new_expanded_val) {
-    console.log("entry clicked");
     this.setState({ expanded: new_expanded_val });
     if (this.props.onClick != null) {
       this.props.onClick(!expanded);
@@ -36,7 +35,8 @@ export default class Entry extends React.Component {
         {moment(this.props.time).format("hh:mm A")}
         <button
           className={`${style.remove_button} ${style.no_select}`}
-          onClick={async () => {
+          onClick={async e => {
+            e.stopPropagation();
             let del = await axios.delete(`/api/entries/${this.props.id}`);
             this.props.onChange();
           }}

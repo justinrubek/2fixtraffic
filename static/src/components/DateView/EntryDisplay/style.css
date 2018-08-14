@@ -41,3 +41,28 @@
   user-select: none; /* Non-prefixed version, currently
                               supported by Chrome and Opera */
 }
+
+.expansion {
+  margin: 2px;
+  padding: 3px;
+  border: 1px solid blue;
+  width: 95%;
+}
+
+.data_group {
+  display: flex;
+}
+
+.data_title {
+  font-weight: bold;
+  flex: 1;
+}
+
+.list_no_bullet {
+  list-style-type: none;
+}
+
+.data_content {
+  color: #ff8600;
+  flex: 1;
+}

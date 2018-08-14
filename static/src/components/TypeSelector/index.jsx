@@ -34,7 +34,7 @@ export default class TypeSelector extends React.Component {
 
     const display = options.map(option => {
       return (
-        <div>
+        <div key={option.name}>
           <input
             type="radio"
             value={option.id}

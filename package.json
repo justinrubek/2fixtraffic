@@ -1,0 +1,22 @@
+{
+  "name": "2traffic",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build --prefix ./static && npm run build --prefix ./server",
+    "start": "npm run start --prefix ./server",
+    "install": "npm i --prefix ./static && npm i --prefix ./server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/justinrubek/2traffic.git"
+  },
+  "author": "Justin Rubek <rubejus@bvu.edu>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/justinrubek/2traffic/issues"
+  },
+  "homepage": "https://gitlab.com/justinrubek/2traffic#README"
+}

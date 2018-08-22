@@ -1,0 +1,75 @@
+.row_group {
+  flex: 1;
+  padding: 10px;
+  margin: 5px;
+  border: 2px solid #1d1d1d;
+  max-width: 250px;
+}
+
+.row_wrapper {
+  display: flex;
+  border: 2px solid #1d1d1d;
+}
+
+.row_title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 5px;
+}
+
+.cell {
+  margin: 2px;
+  border: 1px solid #1d1d1d;
+  cursor: pointer;
+}
+
+.row {
+  list-style-type: none;
+  padding: 2px;
+}
+
+.remove_button {
+  margin: 0.2rem;
+  background-color: red;
+  cursor: pointer;
+  transition: background-color 0.1 ease-out;
+}
+
+.remove_button:hover {
+  background-color: #880000;
+}
+
+.no_select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                              supported by Chrome and Opera */
+}
+
+.expansion {
+  margin: 2px;
+  padding: 3px;
+  border: 1px solid blue;
+  width: 95%;
+}
+
+.data_group {
+  display: flex;
+}
+
+.data_title {
+  font-weight: bold;
+  flex: 1;
+}
+
+.list_no_bullet {
+  list-style-type: none;
+}
+
+.data_content {
+  color: #ff8600;
+  flex: 1;
+}

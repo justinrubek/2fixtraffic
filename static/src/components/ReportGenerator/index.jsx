@@ -37,7 +37,7 @@ export default class ReportGenerator extends React.Component {
         </div>
         <button
           onClick={async () => {
-            const response = await axios.get("/report", {
+            const response = await axios.get("/api/report", {
               params: { start, end },
               responseType: "blob"
             });

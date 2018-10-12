@@ -37,7 +37,16 @@ export default class DateView extends React.Component {
   }
 
   componentDidMount() {
+    const refresh_interval = setInterval(
+      this.refresh,
+      this.props.refresh_interval
+    );
     this.refresh();
+    this.setState({ refresh_interval });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.refresh_interval);
   }
 
   async fetch(date) {
@@ -71,3 +80,7 @@ export default class DateView extends React.Component {
     this.fetch(date);
   }
 }
+
+DateView.defaultProps = {
+  refresh_interval: 10000
+};

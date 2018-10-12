@@ -35,6 +35,10 @@ export default class App extends React.Component {
 
   sendLog() {
     const { type, time } = this.state;
+    if (type == null) {
+      alert("You must select a traffic type.");
+      return;
+    }
     log(type, time);
   }
 

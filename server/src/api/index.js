@@ -133,9 +133,9 @@ router.get("/report", async (req, res) => {
 
 router.post("/scan", async (req, res) => {
   const number = req.body.number;
-  const time = req.body.time;
+  const type = req.body.type;
 
-  logEntry("desk", time, { number });
+  logEntry(type, new Date(), { number });
 
   res.sendStatus(201);
 });

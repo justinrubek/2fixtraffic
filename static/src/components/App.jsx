@@ -7,6 +7,7 @@ import style from "./style.css";
 import TimeSelector from "./TimeSelector";
 import TypeSelector from "./TypeSelector";
 import ReportGenerator from "./ReportGenerator";
+import BulkReportGenerator from "./BulkReportGenerator";
 import TodayPreview from "./TodayPreview";
 import DateView from "./DateView";
 
@@ -72,6 +73,9 @@ export default class App extends React.Component {
         </div>
         <div className={style.box}>
           <ReportGenerator />
+        </div>
+        <div className={style.box}>
+          <BulkReportGenerator />
         </div>
       </div>
     );
